@@ -8,6 +8,15 @@ PrefCompat is a wrapper over the SharedPreference class in Android. It supports 
  How to Use
 -------
 
+
+#### Gradle Configuration
+
+Add the following line to the gradle dependencies for your module.
+
+```groovy
+compile 'com.tramsuninc.libs:prefcompat:0.3'
+```
+
 #### Basic Usage
 
 First initialize the PrefCompat library in your Application class.
