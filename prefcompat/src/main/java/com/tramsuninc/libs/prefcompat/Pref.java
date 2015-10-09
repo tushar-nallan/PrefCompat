@@ -4,9 +4,10 @@ import android.content.Context;
 import android.preference.PreferenceManager;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
- * Init by tusharacharya on 10/8/15.
+ * Init by Tushar Acharya on 10/8/15.
  */
 public class Pref {
 
@@ -24,6 +25,11 @@ public class Pref {
         mContext = ctx.getApplicationContext();
         prefHashMap = new HashMap<>();
         prefHashMap.put(DEFAULT, new PrefInternal(PreferenceManager.getDefaultSharedPreferences(mContext)));
+    }
+
+    public static PrefInternal from(String name) {
+        ensureInit();
+        return from(name, Context.MODE_PRIVATE);
     }
 
     public static PrefInternal from(String name, int mode) {
@@ -152,6 +158,114 @@ public class Pref {
         return pref.getLong(key, defaultValue);
     }
 
+    public static void putStringList(String key, List<String> value) {
+        ensureInit();
+        PrefInternal pref = prefHashMap.get(DEFAULT);
+        pref.putStringList(key, value);
+    }
+
+    public static List<String> getStringList(String key) {
+        ensureInit();
+        PrefInternal pref = prefHashMap.get(DEFAULT);
+        return pref.getStringList(key);
+    }
+
+    public static List<String> getStringList(String key, List<String> defaultValue) {
+        ensureInit();
+        PrefInternal pref = prefHashMap.get(DEFAULT);
+        return pref.getStringList(key, defaultValue);
+    }
+
+    public static void putFloatList(String key, List<Float> value) {
+        ensureInit();
+        PrefInternal pref = prefHashMap.get(DEFAULT);
+        pref.putFloatList(key, value);
+    }
+
+    public static List<Float> getFloatList(String key) {
+        ensureInit();
+        PrefInternal pref = prefHashMap.get(DEFAULT);
+        return pref.getFloatList(key);
+    }
+
+    public static List<Float> getFloatList(String key, List<Float> defaultValue) {
+        ensureInit();
+        PrefInternal pref = prefHashMap.get(DEFAULT);
+        return pref.getFloatList(key, defaultValue);
+    }
+
+    public static void putDoubleList(String key, List<Double> value) {
+        ensureInit();
+        PrefInternal pref = prefHashMap.get(DEFAULT);
+        pref.putDoubleList(key, value);
+    }
+
+    public static List<Double> getDoubleList(String key) {
+        ensureInit();
+        PrefInternal pref = prefHashMap.get(DEFAULT);
+        return pref.getDoubleList(key);
+    }
+
+    public static List<Double> getDoubleList(String key, List<Double> defaultValue) {
+        ensureInit();
+        PrefInternal pref = prefHashMap.get(DEFAULT);
+        return pref.getDoubleList(key, defaultValue);
+    }
+
+    public static void putIntList(String key, List<Integer> value) {
+        ensureInit();
+        PrefInternal pref = prefHashMap.get(DEFAULT);
+        pref.putIntList(key, value);
+    }
+
+    public static List<Integer> getIntList(String key) {
+        ensureInit();
+        PrefInternal pref = prefHashMap.get(DEFAULT);
+        return pref.getIntList(key);
+    }
+
+    public static List<Integer> getIntList(String key, List<Integer> defaultValue) {
+        ensureInit();
+        PrefInternal pref = prefHashMap.get(DEFAULT);
+        return pref.getIntList(key, defaultValue);
+    }
+
+    public static void putBooleanList(String key, List<Boolean> value) {
+        ensureInit();
+        PrefInternal pref = prefHashMap.get(DEFAULT);
+        pref.putBooleanList(key, value);
+    }
+
+    public static List<Boolean> getBooleanList(String key) {
+        ensureInit();
+        PrefInternal pref = prefHashMap.get(DEFAULT);
+        return pref.getBooleanList(key);
+    }
+
+    public static List<Boolean> getBooleanList(String key, List<Boolean> defaultValue) {
+        ensureInit();
+        PrefInternal pref = prefHashMap.get(DEFAULT);
+        return pref.getBooleanList(key, defaultValue);
+    }
+
+    public static void putLongList(String key, List<Long> value) {
+        ensureInit();
+        PrefInternal pref = prefHashMap.get(DEFAULT);
+        pref.putLongList(key, value);
+    }
+
+    public static List<Long> getLongList(String key) {
+        ensureInit();
+        PrefInternal pref = prefHashMap.get(DEFAULT);
+        return pref.getLongList(key);
+    }
+
+    public static List<Long> getLongList(String key, List<Long> defaultValue) {
+        ensureInit();
+        PrefInternal pref = prefHashMap.get(DEFAULT);
+        return pref.getLongList(key, defaultValue);
+    }
+
     public static <T> void putObject(String key, T value) {
         ensureInit();
         PrefInternal pref = prefHashMap.get(DEFAULT);
@@ -161,18 +275,13 @@ public class Pref {
     public static <T> T getObject(String key, Class<T> tClass) {
         ensureInit();
         PrefInternal pref = prefHashMap.get(DEFAULT);
-        return pref.getObject(key, tClass, null);
+        return pref.getObject(key, tClass);
     }
 
     public static <T> T getObject(String key, Class<T> tClass, T defaultValue) {
         ensureInit();
         PrefInternal pref = prefHashMap.get(DEFAULT);
         return pref.getObject(key, tClass, defaultValue);
-    }
-
-    public PrefInternal from(String name) {
-        ensureInit();
-        return from(name, Context.MODE_PRIVATE);
     }
 
     protected static class PrefCompatNotInitedException extends RuntimeException {

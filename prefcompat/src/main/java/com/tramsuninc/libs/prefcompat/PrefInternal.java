@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Init by tusharacharya on 10/8/15.
+ * Init by Tushar Acharya on 10/8/15.
  */
 public class PrefInternal implements PrefInterface {
     SharedPreferences pref;
@@ -154,82 +154,82 @@ public class PrefInternal implements PrefInterface {
 
     @Override
     public List<String> getStringList(String key, List<String> defaultValue) {
-        return null;
+        return Arrays.asList(getCastObject(key, String[].class, defaultValue.toArray(new String[defaultValue.size()])));
     }
 
     @Override
     public void putFloatList(String key, List<Float> value) {
-
+        putString(key, Serialize.toString(value.toArray()));
     }
 
     @Override
     public List<Float> getFloatList(String key) {
-        return null;
+        return Arrays.asList(getCastObject(key, Float[].class, new Float[0]));
     }
 
     @Override
     public List<Float> getFloatList(String key, List<Float> defaultValue) {
-        return null;
+        return Arrays.asList(getCastObject(key, Float[].class, defaultValue.toArray(new Float[defaultValue.size()])));
     }
 
     @Override
     public void putDoubleList(String key, List<Double> value) {
-
+        putString(key, Serialize.toString(value.toArray()));
     }
 
     @Override
     public List<Double> getDoubleList(String key) {
-        return null;
+        return Arrays.asList(getCastObject(key, Double[].class, new Double[0]));
     }
 
     @Override
     public List<Double> getDoubleList(String key, List<Double> defaultValue) {
-        return null;
+        return Arrays.asList(getCastObject(key, Double[].class, defaultValue.toArray(new Double[defaultValue.size()])));
     }
 
     @Override
     public void putIntList(String key, List<Integer> value) {
-
+        putString(key, Serialize.toString(value.toArray()));
     }
 
     @Override
     public List<Integer> getIntList(String key) {
-        return null;
+        return Arrays.asList(getCastObject(key, Integer[].class, new Integer[0]));
     }
 
     @Override
     public List<Integer> getIntList(String key, List<Integer> defaultValue) {
-        return null;
+        return Arrays.asList(getCastObject(key, Integer[].class, defaultValue.toArray(new Integer[defaultValue.size()])));
     }
 
     @Override
     public void putBooleanList(String key, List<Boolean> value) {
-
+        putString(key, Serialize.toString(value.toArray()));
     }
 
     @Override
     public List<Boolean> getBooleanList(String key) {
-        return null;
+        return Arrays.asList(getCastObject(key, Boolean[].class, new Boolean[0]));
     }
 
     @Override
     public List<Boolean> getBooleanList(String key, List<Boolean> defaultValue) {
-        return null;
+        return Arrays.asList(getCastObject(key, Boolean[].class, defaultValue.toArray(new Boolean[defaultValue.size()])));
     }
 
     @Override
     public void putLongList(String key, List<Long> value) {
-
+        putString(key, Serialize.toString(value.toArray()));
     }
 
     @Override
     public List<Long> getLongList(String key) {
-        return null;
+        return Arrays.asList(getCastObject(key, Long[].class, new Long[0]));
     }
 
     @Override
     public List<Long> getLongList(String key, List<Long> defaultValue) {
-        return null;
+        return Arrays.asList(getCastObject(key, Long[].class, defaultValue.toArray(new Long[defaultValue.size()])));
     }
 
     @Override

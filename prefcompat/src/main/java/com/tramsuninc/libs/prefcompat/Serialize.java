@@ -8,7 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /**
- * Init by tusharacharya on 10/8/15.
+ * Init by Tushar Acharya on 10/8/15.
  */
 public class Serialize {
     public static String toString(Object o) {

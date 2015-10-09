@@ -3,7 +3,7 @@ package com.tramsuninc.libs.prefcompat;
 import java.util.List;
 
 /**
- * Init by tusharacharya on 10/8/15.
+ * Init by Tushar Acharya on 10/8/15.
  */
 public interface PrefInterface {
 
