@@ -15,11 +15,7 @@ public class Serialize {
         try {
             ByteArrayOutputStream bo = new ByteArrayOutputStream();
             ObjectOutputStream so = new ObjectOutputStream(bo);
-            if (o instanceof Double) {
-                so.writeDouble((Double) o);
-            } else {
-                so.writeObject(o);
-            }
+            so.writeObject(o);
             so.flush();
             return Base64.encodeToString(bo.toByteArray(), Base64.DEFAULT);
         } catch (Exception e) {

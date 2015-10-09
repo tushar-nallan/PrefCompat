@@ -1,1 +1,1 @@
-include ':SampleApp', ':lib'
+include ':SampleApp', ':prefcompat'
