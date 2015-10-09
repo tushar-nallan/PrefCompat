@@ -14,7 +14,7 @@ PrefCompat is a wrapper over the SharedPreference class in Android. It supports 
 Add the following line to the gradle dependencies for your module.
 
 ```groovy
-compile 'com.tramsuninc.libs:prefcompat:0.3'
+compile 'com.tramsun.libs:prefcompat:0.3'
 ```
 
 #### Basic Usage

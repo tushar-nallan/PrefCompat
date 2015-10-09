@@ -1,10 +1,10 @@
-package com.tramsuninc.libs.prefcompatsample;
+package com.tramsun.libs.prefcompatsample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.tramsuninc.libs.prefcompat.Pref;
+import com.tramsun.libs.prefcompat.Pref;
 
 import java.io.Serializable;
 import java.util.Arrays;

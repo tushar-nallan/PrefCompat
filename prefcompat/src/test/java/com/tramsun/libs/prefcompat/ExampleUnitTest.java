@@ -1,4 +1,4 @@
-package com.tramsuninc.libs.prefcompatsample;
+package com.tramsun.libs.prefcompat;
 
 import org.junit.Test;
 

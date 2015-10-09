@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tramsuninc.libs.prefcompatsample">
+    package="com.tramsun.libs.prefcompatsample">
 
     <application
         android:name=".Application"

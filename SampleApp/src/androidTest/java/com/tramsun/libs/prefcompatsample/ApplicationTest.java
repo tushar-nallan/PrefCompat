@@ -1,4 +1,4 @@
-package com.tramsuninc.libs.prefcompatsample;
+package com.tramsun.libs.prefcompatsample;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

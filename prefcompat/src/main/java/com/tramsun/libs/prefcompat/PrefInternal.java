@@ -1,4 +1,4 @@
-package com.tramsuninc.libs.prefcompat;
+package com.tramsun.libs.prefcompat;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;

@@ -1,6 +1,6 @@
-package com.tramsuninc.libs.prefcompatsample;
+package com.tramsun.libs.prefcompatsample;
 
-import com.tramsuninc.libs.prefcompat.Pref;
+import com.tramsun.libs.prefcompat.Pref;
 
 /**
  * Init by Tushar Acharya on 10/8/15.

@@ -1,4 +1,4 @@
-package com.tramsuninc.libs.prefcompat;
+package com.tramsun.libs.prefcompat;
 
 import android.content.Context;
 import android.preference.PreferenceManager;
