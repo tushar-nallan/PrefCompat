@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -149,12 +150,12 @@ public class PrefInternal implements PrefInterface {
 
     @Override
     public List<String> getStringList(String key) {
-        return Arrays.asList(getCastObject(key, String[].class, new String[0]));
+        return new ArrayList<>(Arrays.asList(getCastObject(key, String[].class, new String[0])));
     }
 
     @Override
     public List<String> getStringList(String key, List<String> defaultValue) {
-        return Arrays.asList(getCastObject(key, String[].class, defaultValue.toArray(new String[defaultValue.size()])));
+        return new ArrayList<>(Arrays.asList(getCastObject(key, String[].class, defaultValue.toArray(new String[defaultValue.size()]))));
     }
 
     @Override
@@ -164,12 +165,12 @@ public class PrefInternal implements PrefInterface {
 
     @Override
     public List<Float> getFloatList(String key) {
-        return Arrays.asList(getCastObject(key, Float[].class, new Float[0]));
+        return new ArrayList<>(Arrays.asList(getCastObject(key, Float[].class, new Float[0])));
     }
 
     @Override
     public List<Float> getFloatList(String key, List<Float> defaultValue) {
-        return Arrays.asList(getCastObject(key, Float[].class, defaultValue.toArray(new Float[defaultValue.size()])));
+        return new ArrayList<>(Arrays.asList(getCastObject(key, Float[].class, defaultValue.toArray(new Float[defaultValue.size()]))));
     }
 
     @Override
@@ -179,12 +180,12 @@ public class PrefInternal implements PrefInterface {
 
     @Override
     public List<Double> getDoubleList(String key) {
-        return Arrays.asList(getCastObject(key, Double[].class, new Double[0]));
+        return new ArrayList<>(Arrays.asList(getCastObject(key, Double[].class, new Double[0])));
     }
 
     @Override
     public List<Double> getDoubleList(String key, List<Double> defaultValue) {
-        return Arrays.asList(getCastObject(key, Double[].class, defaultValue.toArray(new Double[defaultValue.size()])));
+        return new ArrayList<>(Arrays.asList(getCastObject(key, Double[].class, defaultValue.toArray(new Double[defaultValue.size()]))));
     }
 
     @Override
@@ -194,12 +195,12 @@ public class PrefInternal implements PrefInterface {
 
     @Override
     public List<Integer> getIntList(String key) {
-        return Arrays.asList(getCastObject(key, Integer[].class, new Integer[0]));
+        return new ArrayList<>(Arrays.asList(getCastObject(key, Integer[].class, new Integer[0])));
     }
 
     @Override
     public List<Integer> getIntList(String key, List<Integer> defaultValue) {
-        return Arrays.asList(getCastObject(key, Integer[].class, defaultValue.toArray(new Integer[defaultValue.size()])));
+        return new ArrayList<>(Arrays.asList(getCastObject(key, Integer[].class, defaultValue.toArray(new Integer[defaultValue.size()]))));
     }
 
     @Override
@@ -209,12 +210,12 @@ public class PrefInternal implements PrefInterface {
 
     @Override
     public List<Boolean> getBooleanList(String key) {
-        return Arrays.asList(getCastObject(key, Boolean[].class, new Boolean[0]));
+        return new ArrayList<>(Arrays.asList(getCastObject(key, Boolean[].class, new Boolean[0])));
     }
 
     @Override
     public List<Boolean> getBooleanList(String key, List<Boolean> defaultValue) {
-        return Arrays.asList(getCastObject(key, Boolean[].class, defaultValue.toArray(new Boolean[defaultValue.size()])));
+        return new ArrayList<>(Arrays.asList(getCastObject(key, Boolean[].class, defaultValue.toArray(new Boolean[defaultValue.size()]))));
     }
 
     @Override
@@ -224,12 +225,12 @@ public class PrefInternal implements PrefInterface {
 
     @Override
     public List<Long> getLongList(String key) {
-        return Arrays.asList(getCastObject(key, Long[].class, new Long[0]));
+        return new ArrayList<>(Arrays.asList(getCastObject(key, Long[].class, new Long[0])));
     }
 
     @Override
     public List<Long> getLongList(String key, List<Long> defaultValue) {
-        return Arrays.asList(getCastObject(key, Long[].class, defaultValue.toArray(new Long[defaultValue.size()])));
+        return new ArrayList<>(Arrays.asList(getCastObject(key, Long[].class, defaultValue.toArray(new Long[defaultValue.size()]))));
     }
 
     @Override
