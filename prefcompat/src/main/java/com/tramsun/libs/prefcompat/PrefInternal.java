@@ -13,6 +13,12 @@ import java.util.List;
  * Init by Tushar Acharya on 10/8/15.
  */
 public class PrefInternal implements PrefInterface {
+
+    private static final float DEFAULT_FLOAT = -1;
+    private static final Integer DEFAULT_INT = -1;
+    private static final Boolean DEFAULT_BOOLEAN = false;
+    private static final Long DEFAULT_LONG = -1L;
+
     SharedPreferences pref;
     SharedPreferences.Editor editor;
 
@@ -60,7 +66,7 @@ public class PrefInternal implements PrefInterface {
 
     @Override
     public String getString(String key) {
-        return getString(key, null);
+        return getString(key, "");
     }
 
     @Override
@@ -75,7 +81,7 @@ public class PrefInternal implements PrefInterface {
 
     @Override
     public Float getFloat(String key) {
-        return getFloat(key, null);
+        return pref.getFloat(key, DEFAULT_FLOAT);
     }
 
     @Override
@@ -105,7 +111,7 @@ public class PrefInternal implements PrefInterface {
 
     @Override
     public Integer getInt(String key) {
-        return getInt(key, null);
+        return getInt(key, DEFAULT_INT);
     }
 
     @Override
@@ -120,7 +126,7 @@ public class PrefInternal implements PrefInterface {
 
     @Override
     public Boolean getBoolean(String key) {
-        return getBoolean(key, null);
+        return getBoolean(key, DEFAULT_BOOLEAN);
     }
 
     @Override
@@ -135,7 +141,7 @@ public class PrefInternal implements PrefInterface {
 
     @Override
     public Long getLong(String key) {
-        return getLong(key, null);
+        return getLong(key, DEFAULT_LONG);
     }
 
     @Override
