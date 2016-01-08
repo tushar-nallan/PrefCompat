@@ -9,6 +9,7 @@ import java.util.List;
 /**
  * Init by Tushar Acharya on 10/8/15.
  */
+@SuppressWarnings("unused")
 public class Pref {
 
     public static final String DEFAULT = "";
