@@ -1,11 +1,8 @@
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PreferenceInjector-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/1569)
-
-
 # PrefCompat
 
-PrefCompat is a wrapper over the SharedPreference class in Android. It supports storing objects other than the standard primitives while decreasing the boiler plate code. It uses java annotations to bind listeners on SharedPreference changes.
+PrefCompat is a wrapper over the SharedPreference class in Android. It supports storing objects other than the standard primitives while decreasing the boiler plate code.
 
- How to Use
+How to Use
 -------
 
 
@@ -14,7 +11,7 @@ PrefCompat is a wrapper over the SharedPreference class in Android. It supports 
 Add the following line to the gradle dependencies for your module.
 
 ```groovy
-compile 'com.tramsun.libs:prefcompat:0.3'
+compile 'com.tramsun.libs:prefcompat:0.6'
 ```
 
 #### Basic Usage
