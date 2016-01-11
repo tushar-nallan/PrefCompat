@@ -1,3 +1,5 @@
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PrefCompat-green.svg?style=true)](https://android-arsenal.com/details/1/3003)
+
 # PrefCompat
 
 PrefCompat is a wrapper over the SharedPreference class in Android. It supports storing objects other than the standard primitives while decreasing the boiler plate code.
