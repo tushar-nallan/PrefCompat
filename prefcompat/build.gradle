@@ -5,7 +5,7 @@ apply plugin: 'com.jfrog.bintray'
 def siteUrl = 'https://github.com/tushar-acharya/PrefCompat'
 def gitUrl = 'https://github.com/tushar-acharya/PrefCompat.git'
 group = "com.tramsun.libs"
-version = "0.6"
+version = "0.7"
 
 android {
     compileSdkVersion 23
@@ -15,7 +15,7 @@ android {
     defaultConfig {
         minSdkVersion 10
         targetSdkVersion 23
-        versionCode 6
+        versionCode 7
         versionName version
     }
     buildTypes {
