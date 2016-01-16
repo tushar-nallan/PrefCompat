@@ -61,7 +61,18 @@ public class PrefInternal implements PrefInterface {
 
     @Override
     public void putString(String key, String value) {
-        editor.putString(key, value).commit();
+        storeEntry(editor.putString(key, value));
+    }
+
+    private void storeEntry(SharedPreferences.Editor editor) {
+        switch (Pref.mDefaultCommitBehavior) {
+            case Pref.COMMIT_BY_DEFAULT:
+                editor.commit();
+                break;
+            case Pref.APPLY_BY_DEFAULT:
+                editor.apply();
+                break;
+        }
     }
 
     @Override
@@ -76,7 +87,7 @@ public class PrefInternal implements PrefInterface {
 
     @Override
     public void putFloat(String key, Float value) {
-        editor.putFloat(key, value).commit();
+        storeEntry(editor.putFloat(key, value));
     }
 
     @Override
@@ -106,7 +117,7 @@ public class PrefInternal implements PrefInterface {
 
     @Override
     public void putInt(String key, Integer value) {
-        editor.putInt(key, value).commit();
+        storeEntry(editor.putInt(key, value));
     }
 
     @Override
@@ -121,7 +132,7 @@ public class PrefInternal implements PrefInterface {
 
     @Override
     public void putBoolean(String key, Boolean value) {
-        editor.putBoolean(key, value).commit();
+        storeEntry(editor.putBoolean(key, value));
     }
 
     @Override
@@ -136,7 +147,7 @@ public class PrefInternal implements PrefInterface {
 
     @Override
     public void putLong(String key, Long value) {
-        editor.putLong(key, value).commit();
+        storeEntry(editor.putLong(key, value));
     }
 
     @Override

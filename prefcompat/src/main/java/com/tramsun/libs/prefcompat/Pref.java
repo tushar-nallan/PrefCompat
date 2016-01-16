@@ -13,12 +13,15 @@ import java.util.List;
 public class Pref {
 
     public static final String DEFAULT = "";
+    public static final int COMMIT_BY_DEFAULT = 0;
+    public static final int APPLY_BY_DEFAULT = 1;
 
     static Context mContext = null;
+    public static int mDefaultCommitBehavior;
 
     static HashMap<String, PrefInternal> prefHashMap;
 
-    public static void init(Context ctx) {
+    public static void init(Context ctx, int defaultCommitBehavior) {
         if (ctx == null) {
             throw new NullPointerException("PrefCompat.init called will null context");
         }
@@ -26,6 +29,20 @@ public class Pref {
         mContext = ctx.getApplicationContext();
         prefHashMap = new HashMap<>();
         prefHashMap.put(DEFAULT, new PrefInternal(PreferenceManager.getDefaultSharedPreferences(mContext)));
+
+        mDefaultCommitBehavior = defaultCommitBehavior;
+    }
+
+    public static void init(Context ctx) {
+        init(ctx, COMMIT_BY_DEFAULT);
+    }
+
+    public static void deInit() {
+        mContext = null;
+        if (prefHashMap != null) {
+            prefHashMap.clear();
+            prefHashMap = null;
+        }
     }
 
     public static PrefInternal from(String name) {
