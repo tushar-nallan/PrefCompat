@@ -78,7 +78,7 @@ Do note that these subscriptions are standard RxJava subscriptions, hence they n
 License
 -------
 
-    Copyright 2015 - 2016 Mutual Mobile
+    Copyright 2015 - 2016 Tushar Acharya
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
