@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String USER1 = "USER1";
     public static final String PERSON1 = "PERSON1";
     private static final String TAG = "MainActivity";
+
     private CompositeSubscription mCompositeSubscription;
 
     @Override
