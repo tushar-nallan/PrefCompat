@@ -5,7 +5,7 @@ apply plugin: 'com.jfrog.bintray'
 def siteUrl = 'https://github.com/tushar-acharya/PrefCompat'
 def gitUrl = 'https://github.com/tushar-acharya/PrefCompat.git'
 group = "com.tramsun.libs"
-version = "0.7"
+version = "0.8"
 
 android {
     compileSdkVersion 23
@@ -15,7 +15,7 @@ android {
     defaultConfig {
         minSdkVersion 10
         targetSdkVersion 23
-        versionCode 7
+        versionCode 8
         versionName version
     }
     buildTypes {
@@ -74,7 +74,7 @@ task sourcesJar(type: Jar) {
 artifacts {
     archives sourcesJar
 }
-
+/*
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
@@ -94,3 +94,4 @@ bintray {
         publicDownloadNumbers = true
     }
 }
+*/
