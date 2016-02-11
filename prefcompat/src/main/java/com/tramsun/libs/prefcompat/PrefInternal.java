@@ -7,12 +7,16 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+
+import rx.Observable;
+import rx.Subscriber;
 
 /**
  * Init by Tushar Acharya on 10/8/15.
  */
-public class PrefInternal implements PrefInterface {
+public class PrefInternal implements PrefInterface, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final float DEFAULT_FLOAT = -1;
     private static final Integer DEFAULT_INT = -1;
@@ -21,6 +25,7 @@ public class PrefInternal implements PrefInterface {
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
+    private HashMap<String, Subscriber<? super String>> mPrefSubscribers = new HashMap<>();
 
     @SuppressLint("CommitPrefEdits")
     public PrefInternal(SharedPreferences pref) {
@@ -265,4 +270,33 @@ public class PrefInternal implements PrefInterface {
         return getCastObject(key, tClass, defaultValue);
     }
 
+    public void deInit() {
+        for (String key : mPrefSubscribers.keySet()) {
+            removeObservableKey(key);
+        }
+    }
+
+    public Observable<String> getObservable(final String key) {
+        return Observable.create(new Observable.OnSubscribe<String>() {
+            @Override
+            public void call(Subscriber<? super String> subscriber) {
+                mPrefSubscribers.put(key, subscriber);
+            }
+        });
+    }
+
+    public void removeObservableKey(String key) {
+        mPrefSubscribers.remove(key);
+        if (mPrefSubscribers.isEmpty()) {
+            pref.unregisterOnSharedPreferenceChangeListener(this);
+        }
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        Subscriber<? super String> subscriber = mPrefSubscribers.get(key);
+        if (subscriber != null) {
+            subscriber.onNext(key);
+        }
+    }
 }

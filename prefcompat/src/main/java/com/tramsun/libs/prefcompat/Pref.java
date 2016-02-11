@@ -6,6 +6,8 @@ import android.preference.PreferenceManager;
 import java.util.HashMap;
 import java.util.List;
 
+import rx.Observable;
+
 /**
  * Init by Tushar Acharya on 10/8/15.
  */
@@ -31,6 +33,8 @@ public class Pref {
         prefHashMap.put(DEFAULT, new PrefInternal(PreferenceManager.getDefaultSharedPreferences(mContext)));
 
         mDefaultCommitBehavior = defaultCommitBehavior;
+
+
     }
 
     public static void init(Context ctx) {
@@ -40,9 +44,22 @@ public class Pref {
     public static void deInit() {
         mContext = null;
         if (prefHashMap != null) {
+            for (PrefInternal prefInternal : prefHashMap.values()) {
+                prefInternal.deInit();
+            }
             prefHashMap.clear();
             prefHashMap = null;
         }
+    }
+
+    public static void stopListeningOn(String key) {
+        PrefInternal pref = prefHashMap.get(DEFAULT);
+        pref.removeObservableKey(key);
+    }
+
+    public static Observable<String> listenOn(String key) {
+        PrefInternal pref = prefHashMap.get(DEFAULT);
+        return pref.getObservable(key);
     }
 
     public static PrefInternal from(String name) {
