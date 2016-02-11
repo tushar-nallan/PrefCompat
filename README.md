@@ -2,7 +2,7 @@
 
 # PrefCompat
 
-PrefCompat is a wrapper over the SharedPreference class in Android. It supports storing objects other than the standard primitives while decreasing the boiler plate code.
+PrefCompat is a wrapper over the SharedPreference class in Android. It supports storing objects other than the standard primitives while decreasing the boiler plate code. It also enables listening for changes on specific keys on a SharedPreference with RxJava support.
 
 How to Use
 -------
@@ -16,7 +16,7 @@ Add the following line to the gradle dependencies for your module.
 compile 'com.tramsun.libs:prefcompat:0.6'
 ```
 
-#### Basic Usage
+#### Usage
 
 First initialize the PrefCompat library in your Application class.
 
@@ -51,3 +51,43 @@ public class MainActivity extends Activity {
     }
 }
 ```
+
+Listen on changes to specific key in a SharedPreference
+
+```java
+// Listen on a key in default SharedPreferences
+Subscription subscription1 = Pref.listenOn("age").subscribe(new Action1<String>() {
+    @Override
+    public void call(String key) {
+        Log.d(TAG, "1. Value of " + key + " changed to " + Pref.getInt(key));
+    }
+});
+
+// Listen on a key in named SharedPreferences
+Subscription subscription2 = Pref.from("scores").listenOn("user1").subscribe(new Action1<String>() {
+    @Override
+    public void call(String key) {
+        Log.d(TAG, "2. Scores of " + key + " changed to " + Pref.from(SP_SCORES).getDoubleList(key).toString());
+    }
+});
+```
+
+Do note that these subscriptions are standard RxJava subscriptions, hence they need to be unsubscribed, failing which will lead to leaking of subscriptions
+
+
+License
+-------
+
+    Copyright 2015 - 2016 Mutual Mobile
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
