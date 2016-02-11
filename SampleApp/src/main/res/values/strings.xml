@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PrefCompatSample</string>
+    <string name="increment">Increment</string>
+    <string name="check_logs">Check ADB Logs</string>
 </resources>

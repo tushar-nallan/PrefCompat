@@ -52,14 +52,9 @@ public class Pref {
         }
     }
 
-    public static void stopListeningOn(String key) {
-        PrefInternal pref = prefHashMap.get(DEFAULT);
-        pref.removeObservableKey(key);
-    }
-
     public static Observable<String> listenOn(String key) {
         PrefInternal pref = prefHashMap.get(DEFAULT);
-        return pref.getObservable(key);
+        return pref.listenOn(key);
     }
 
     public static PrefInternal from(String name) {

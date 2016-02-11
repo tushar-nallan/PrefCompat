@@ -7,30 +7,52 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 import rx.Observable;
 import rx.Subscriber;
+import rx.functions.Action0;
+import rx.functions.Func1;
+import rx.subscriptions.Subscriptions;
 
 /**
  * Init by Tushar Acharya on 10/8/15.
  */
-public class PrefInternal implements PrefInterface, SharedPreferences.OnSharedPreferenceChangeListener {
+public class PrefInternal implements PrefInterface {
 
     private static final float DEFAULT_FLOAT = -1;
     private static final Integer DEFAULT_INT = -1;
     private static final Boolean DEFAULT_BOOLEAN = false;
     private static final Long DEFAULT_LONG = -1L;
+    private final Observable<String> mObservable;
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
-    private HashMap<String, Subscriber<? super String>> mPrefSubscribers = new HashMap<>();
 
     @SuppressLint("CommitPrefEdits")
-    public PrefInternal(SharedPreferences pref) {
+    public PrefInternal(final SharedPreferences pref) {
         this.pref = pref;
         this.editor = pref.edit();
+        mObservable = Observable.create(new Observable.OnSubscribe<String>() {
+            @Override
+            public void call(final Subscriber<? super String> subscriber) {
+                final SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+                    @Override
+                    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                        subscriber.onNext(key);
+                    }
+                };
+                pref.registerOnSharedPreferenceChangeListener(listener);
+
+                subscriber.add(Subscriptions.create(new Action0() {
+                    @Override
+                    public void call() {
+                        Log.e(PrefInternal.class.getSimpleName(), "Unregistering");
+                        pref.unregisterOnSharedPreferenceChangeListener(listener);
+                    }
+                }));
+            }
+        });
     }
 
     private <T> T getCastObject(String key, Class<T> tClass) {
@@ -270,33 +292,17 @@ public class PrefInternal implements PrefInterface, SharedPreferences.OnSharedPr
         return getCastObject(key, tClass, defaultValue);
     }
 
-    public void deInit() {
-        for (String key : mPrefSubscribers.keySet()) {
-            removeObservableKey(key);
-        }
-    }
-
-    public Observable<String> getObservable(final String key) {
-        return Observable.create(new Observable.OnSubscribe<String>() {
+    public Observable<String> listenOn(final String key) {
+        return mObservable.filter(new Func1<String, Boolean>() {
             @Override
-            public void call(Subscriber<? super String> subscriber) {
-                mPrefSubscribers.put(key, subscriber);
+            public Boolean call(String s) {
+                return s.equals(key);
             }
         });
     }
 
-    public void removeObservableKey(String key) {
-        mPrefSubscribers.remove(key);
-        if (mPrefSubscribers.isEmpty()) {
-            pref.unregisterOnSharedPreferenceChangeListener(this);
-        }
-    }
+    // ToDo
+    public void deInit() {
 
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        Subscriber<? super String> subscriber = mPrefSubscribers.get(key);
-        if (subscriber != null) {
-            subscriber.onNext(key);
-        }
     }
 }
