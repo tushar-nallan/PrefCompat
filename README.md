@@ -57,7 +57,7 @@ Listen on changes to specific key in a SharedPreference
 
 ```java
 // Listen on a key in default SharedPreferences
-Subscription subscription1 = Pref.listenOn("age").subscribe(new Action1<String>() {
+Pref.listenOn("age").subscribe(new Action1<String>() {
     @Override
     public void call(String key) {
         Log.d(TAG, "1. Value of " + key + " changed to " + Pref.getInt(key));
@@ -65,7 +65,7 @@ Subscription subscription1 = Pref.listenOn("age").subscribe(new Action1<String>(
 });
 
 // Listen on a key in named SharedPreferences
-Subscription subscription2 = Pref.from("scores").listenOn("user1").subscribe(new Action1<String>() {
+Pref.from("scores").listenOn("user1").subscribe(new Action1<String>() {
     @Override
     public void call(String key) {
         Log.d(TAG, "2. Scores of " + key + " changed to " + Pref.from(SP_SCORES).getDoubleList(key).toString());
