@@ -3,7 +3,6 @@ package com.tramsun.libs.prefcompat;
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,6 +25,8 @@ public class PrefInternal implements PrefInterface {
     private static final Long DEFAULT_LONG = -1L;
     private final Observable<String> mObservable;
 
+    static Logger log = Logger.getLogger();
+
     SharedPreferences pref;
     SharedPreferences.Editor editor;
 
@@ -47,7 +48,7 @@ public class PrefInternal implements PrefInterface {
                 subscriber.add(Subscriptions.create(new Action0() {
                     @Override
                     public void call() {
-                        Log.e(PrefInternal.class.getSimpleName(), "Unregistering");
+                        log.d("Un-registering PrefCompat");
                         pref.unregisterOnSharedPreferenceChangeListener(listener);
                     }
                 }));
@@ -57,7 +58,7 @@ public class PrefInternal implements PrefInterface {
 
     private <T> T getCastObject(String key, Class<T> tClass) {
         String s = pref.getString(key, null);
-        Log.e("getCastObject", "key=" + key + ", value='" + s + "'");
+        log.d("getCastObject: key=" + key + ", value='" + s + "'");
         if (TextUtils.isEmpty(s)) {
             return null;
         }

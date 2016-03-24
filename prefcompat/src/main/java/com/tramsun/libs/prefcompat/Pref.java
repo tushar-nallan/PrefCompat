@@ -2,6 +2,7 @@ package com.tramsun.libs.prefcompat;
 
 import android.content.Context;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +24,9 @@ public class Pref {
 
     static HashMap<String, PrefInternal> prefHashMap;
 
-    public static void init(Context ctx, int defaultCommitBehavior) {
+    static Logger log = Logger.getLogger();
+
+    public static void init(Context ctx, int defaultCommitBehavior, int logLevel) {
         if (ctx == null) {
             throw new NullPointerException("PrefCompat.init called will null context");
         }
@@ -34,14 +37,23 @@ public class Pref {
 
         mDefaultCommitBehavior = defaultCommitBehavior;
 
+        setLogLevel(logLevel);
+    }
 
+    public static void init(Context ctx, int defaultCommitBehavior) {
+        init(ctx, defaultCommitBehavior, Log.ERROR);
     }
 
     public static void init(Context ctx) {
         init(ctx, COMMIT_BY_DEFAULT);
     }
 
+    public static void setLogLevel(int logLevel) {
+        Logger.setLogLevel(logLevel);
+    }
+
     public static void deInit() {
+        log.d("deInit() called");
         mContext = null;
         if (prefHashMap != null) {
             for (PrefInternal prefInternal : prefHashMap.values()) {
@@ -53,6 +65,7 @@ public class Pref {
     }
 
     public static Observable<String> listenOn(String key) {
+        log.d("listenOn() called");
         PrefInternal pref = prefHashMap.get(DEFAULT);
         return pref.listenOn(key);
     }
