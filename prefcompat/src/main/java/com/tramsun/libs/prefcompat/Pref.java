@@ -56,9 +56,6 @@ public class Pref {
         log.d("deInit() called");
         mContext = null;
         if (prefHashMap != null) {
-            for (PrefInternal prefInternal : prefHashMap.values()) {
-                prefInternal.deInit();
-            }
             prefHashMap.clear();
             prefHashMap = null;
         }
@@ -87,16 +84,16 @@ public class Pref {
         return prefInternal;
     }
 
-    protected static void ensureInit() throws PrefCompatNotInitedException {
+    protected static void ensureInit() {
         if (mContext == null || prefHashMap == null || prefHashMap.get(DEFAULT) == null) {
             throw new PrefCompatNotInitedException();
         }
     }
 
-    public static void putString(String key, String value) {
+    public static boolean putString(String key, String value) {
         ensureInit();
         PrefInternal pref = prefHashMap.get(DEFAULT);
-        pref.putString(key, value);
+        return pref.putString(key, value);
     }
 
     public static String getString(String key) {
@@ -111,10 +108,10 @@ public class Pref {
         return pref.getString(key, defaultValue);
     }
 
-    public static void putFloat(String key, Float value) {
+    public static boolean putFloat(String key, Float value) {
         ensureInit();
         PrefInternal pref = prefHashMap.get(DEFAULT);
-        pref.putFloat(key, value);
+        return pref.putFloat(key, value);
     }
 
     public static Float getFloat(String key) {
@@ -129,10 +126,10 @@ public class Pref {
         return pref.getFloat(key, defaultValue);
     }
 
-    public static void putDouble(String key, Double value) {
+    public static boolean putDouble(String key, Double value) {
         ensureInit();
         PrefInternal pref = prefHashMap.get(DEFAULT);
-        pref.putDouble(key, value);
+        return pref.putDouble(key, value);
     }
 
     public static Double getDouble(String key) {
@@ -147,10 +144,10 @@ public class Pref {
         return pref.getDouble(key, defaultValue);
     }
 
-    public static void putInt(String key, Integer value) {
+    public static boolean putInt(String key, Integer value) {
         ensureInit();
         PrefInternal pref = prefHashMap.get(DEFAULT);
-        pref.putInt(key, value);
+        return pref.putInt(key, value);
     }
 
     public static Integer getInt(String key) {
@@ -165,10 +162,10 @@ public class Pref {
         return pref.getInt(key, defaultValue);
     }
 
-    public static void putBoolean(String key, Boolean value) {
+    public static boolean putBoolean(String key, Boolean value) {
         ensureInit();
         PrefInternal pref = prefHashMap.get(DEFAULT);
-        pref.putBoolean(key, value);
+        return pref.putBoolean(key, value);
     }
 
     public static Boolean getBoolean(String key) {
@@ -183,10 +180,10 @@ public class Pref {
         return pref.getBoolean(key, defaultValue);
     }
 
-    public static void putLong(String key, Long value) {
+    public static boolean putLong(String key, Long value) {
         ensureInit();
         PrefInternal pref = prefHashMap.get(DEFAULT);
-        pref.putLong(key, value);
+        return pref.putLong(key, value);
     }
 
     public static Long getLong(String key) {
@@ -201,10 +198,10 @@ public class Pref {
         return pref.getLong(key, defaultValue);
     }
 
-    public static void putStringList(String key, List<String> value) {
+    public static boolean putStringList(String key, List<String> value) {
         ensureInit();
         PrefInternal pref = prefHashMap.get(DEFAULT);
-        pref.putStringList(key, value);
+        return pref.putStringList(key, value);
     }
 
     public static List<String> getStringList(String key) {
@@ -219,10 +216,10 @@ public class Pref {
         return pref.getStringList(key, defaultValue);
     }
 
-    public static void putFloatList(String key, List<Float> value) {
+    public static boolean putFloatList(String key, List<Float> value) {
         ensureInit();
         PrefInternal pref = prefHashMap.get(DEFAULT);
-        pref.putFloatList(key, value);
+        return pref.putFloatList(key, value);
     }
 
     public static List<Float> getFloatList(String key) {
@@ -237,10 +234,10 @@ public class Pref {
         return pref.getFloatList(key, defaultValue);
     }
 
-    public static void putDoubleList(String key, List<Double> value) {
+    public static boolean putDoubleList(String key, List<Double> value) {
         ensureInit();
         PrefInternal pref = prefHashMap.get(DEFAULT);
-        pref.putDoubleList(key, value);
+        return pref.putDoubleList(key, value);
     }
 
     public static List<Double> getDoubleList(String key) {
@@ -255,10 +252,10 @@ public class Pref {
         return pref.getDoubleList(key, defaultValue);
     }
 
-    public static void putIntList(String key, List<Integer> value) {
+    public static boolean putIntList(String key, List<Integer> value) {
         ensureInit();
         PrefInternal pref = prefHashMap.get(DEFAULT);
-        pref.putIntList(key, value);
+        return pref.putIntList(key, value);
     }
 
     public static List<Integer> getIntList(String key) {
@@ -273,10 +270,10 @@ public class Pref {
         return pref.getIntList(key, defaultValue);
     }
 
-    public static void putBooleanList(String key, List<Boolean> value) {
+    public static boolean putBooleanList(String key, List<Boolean> value) {
         ensureInit();
         PrefInternal pref = prefHashMap.get(DEFAULT);
-        pref.putBooleanList(key, value);
+        return pref.putBooleanList(key, value);
     }
 
     public static List<Boolean> getBooleanList(String key) {
@@ -291,10 +288,10 @@ public class Pref {
         return pref.getBooleanList(key, defaultValue);
     }
 
-    public static void putLongList(String key, List<Long> value) {
+    public static boolean putLongList(String key, List<Long> value) {
         ensureInit();
         PrefInternal pref = prefHashMap.get(DEFAULT);
-        pref.putLongList(key, value);
+        return pref.putLongList(key, value);
     }
 
     public static List<Long> getLongList(String key) {
@@ -309,10 +306,10 @@ public class Pref {
         return pref.getLongList(key, defaultValue);
     }
 
-    public static <T> void putObject(String key, T value) {
+    public static <T> boolean putObject(String key, T value) {
         ensureInit();
         PrefInternal pref = prefHashMap.get(DEFAULT);
-        pref.putObject(key, value);
+        return pref.putObject(key, value);
     }
 
     public static <T> T getObject(String key, Class<T> tClass) {

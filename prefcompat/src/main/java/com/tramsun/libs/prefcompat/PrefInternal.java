@@ -25,15 +25,15 @@ public class PrefInternal implements PrefInterface {
     private static final Long DEFAULT_LONG = -1L;
     private final Observable<String> mObservable;
 
-    static Logger log = Logger.getLogger();
+    private static Logger log = Logger.getLogger();
 
-    SharedPreferences pref;
-    SharedPreferences.Editor editor;
+    private SharedPreferences pref;
+    private final SharedPreferences.Editor editor;
 
     @SuppressLint("CommitPrefEdits")
     public PrefInternal(final SharedPreferences pref) {
         this.pref = pref;
-        this.editor = pref.edit();
+        editor = pref.edit();
         mObservable = Observable.create(new Observable.OnSubscribe<String>() {
             @Override
             public void call(final Subscriber<? super String> subscriber) {
@@ -65,6 +65,7 @@ public class PrefInternal implements PrefInterface {
         try {
             return Serialize.fromString(s, tClass);
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -77,6 +78,7 @@ public class PrefInternal implements PrefInterface {
             try {
                 obj = Serialize.fromString(s, tClass);
             } catch (Exception e) {
+                e.printStackTrace();
                 obj = null;
             }
         }
@@ -88,18 +90,18 @@ public class PrefInternal implements PrefInterface {
     }
 
     @Override
-    public void putString(String key, String value) {
-        storeEntry(editor.putString(key, value));
+    public boolean putString(String key, String value) {
+        return storeEntry(editor.putString(key, value));
     }
 
-    private void storeEntry(SharedPreferences.Editor editor) {
+    private boolean storeEntry(SharedPreferences.Editor editor) {
         switch (Pref.mDefaultCommitBehavior) {
-            case Pref.COMMIT_BY_DEFAULT:
-                editor.commit();
-                break;
             case Pref.APPLY_BY_DEFAULT:
                 editor.apply();
-                break;
+                return true;
+            case Pref.COMMIT_BY_DEFAULT:
+            default:
+                return editor.commit();
         }
     }
 
@@ -114,8 +116,8 @@ public class PrefInternal implements PrefInterface {
     }
 
     @Override
-    public void putFloat(String key, Float value) {
-        storeEntry(editor.putFloat(key, value));
+    public boolean putFloat(String key, Float value) {
+        return storeEntry(editor.putFloat(key, value));
     }
 
     @Override
@@ -129,8 +131,8 @@ public class PrefInternal implements PrefInterface {
     }
 
     @Override
-    public void putDouble(String key, Double value) {
-        putString(key, Serialize.toString(value));
+    public boolean putDouble(String key, Double value) {
+        return putString(key, Serialize.toString(value));
     }
 
     @Override
@@ -144,8 +146,8 @@ public class PrefInternal implements PrefInterface {
     }
 
     @Override
-    public void putInt(String key, Integer value) {
-        storeEntry(editor.putInt(key, value));
+    public boolean putInt(String key, Integer value) {
+        return storeEntry(editor.putInt(key, value));
     }
 
     @Override
@@ -159,8 +161,8 @@ public class PrefInternal implements PrefInterface {
     }
 
     @Override
-    public void putBoolean(String key, Boolean value) {
-        storeEntry(editor.putBoolean(key, value));
+    public boolean putBoolean(String key, Boolean value) {
+        return storeEntry(editor.putBoolean(key, value));
     }
 
     @Override
@@ -174,8 +176,8 @@ public class PrefInternal implements PrefInterface {
     }
 
     @Override
-    public void putLong(String key, Long value) {
-        storeEntry(editor.putLong(key, value));
+    public boolean putLong(String key, Long value) {
+        return storeEntry(editor.putLong(key, value));
     }
 
     @Override
@@ -189,8 +191,8 @@ public class PrefInternal implements PrefInterface {
     }
 
     @Override
-    public void putStringList(String key, List<String> value) {
-        putString(key, Serialize.toString(value.toArray()));
+    public boolean putStringList(String key, List<String> value) {
+        return putString(key, Serialize.toString(value.toArray()));
     }
 
     @Override
@@ -204,8 +206,8 @@ public class PrefInternal implements PrefInterface {
     }
 
     @Override
-    public void putFloatList(String key, List<Float> value) {
-        putString(key, Serialize.toString(value.toArray()));
+    public boolean putFloatList(String key, List<Float> value) {
+        return putString(key, Serialize.toString(value.toArray()));
     }
 
     @Override
@@ -219,8 +221,8 @@ public class PrefInternal implements PrefInterface {
     }
 
     @Override
-    public void putDoubleList(String key, List<Double> value) {
-        putString(key, Serialize.toString(value.toArray()));
+    public boolean putDoubleList(String key, List<Double> value) {
+        return putString(key, Serialize.toString(value.toArray()));
     }
 
     @Override
@@ -234,8 +236,8 @@ public class PrefInternal implements PrefInterface {
     }
 
     @Override
-    public void putIntList(String key, List<Integer> value) {
-        putString(key, Serialize.toString(value.toArray()));
+    public boolean putIntList(String key, List<Integer> value) {
+        return putString(key, Serialize.toString(value.toArray()));
     }
 
     @Override
@@ -249,8 +251,8 @@ public class PrefInternal implements PrefInterface {
     }
 
     @Override
-    public void putBooleanList(String key, List<Boolean> value) {
-        putString(key, Serialize.toString(value.toArray()));
+    public boolean putBooleanList(String key, List<Boolean> value) {
+        return putString(key, Serialize.toString(value.toArray()));
     }
 
     @Override
@@ -264,8 +266,8 @@ public class PrefInternal implements PrefInterface {
     }
 
     @Override
-    public void putLongList(String key, List<Long> value) {
-        putString(key, Serialize.toString(value.toArray()));
+    public boolean putLongList(String key, List<Long> value) {
+        return putString(key, Serialize.toString(value.toArray()));
     }
 
     @Override
@@ -279,8 +281,8 @@ public class PrefInternal implements PrefInterface {
     }
 
     @Override
-    public <T> void putObject(String key, T value) {
-        putString(key, Serialize.toString(value));
+    public <T> boolean putObject(String key, T value) {
+        return putString(key, Serialize.toString(value));
     }
 
     @Override
@@ -300,10 +302,5 @@ public class PrefInternal implements PrefInterface {
                 return s.equals(key);
             }
         });
-    }
-
-    // ToDo
-    public void deInit() {
-
     }
 }
