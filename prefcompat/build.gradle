@@ -74,7 +74,7 @@ task sourcesJar(type: Jar) {
 artifacts {
     archives sourcesJar
 }
-
+/*
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
@@ -93,4 +93,4 @@ bintray {
         labels = ['aar', 'android', 'example']
         publicDownloadNumbers = true
     }
-}
+}*/
