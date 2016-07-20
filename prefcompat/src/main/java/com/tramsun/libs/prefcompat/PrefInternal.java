@@ -74,6 +74,7 @@ public class PrefInternal implements PrefInterface {
         T obj = null;
 
         String s = pref.getString(key, null);
+        log.d("getCastObject: key=" + key + ", value='" + s + "'");
         if (!TextUtils.isEmpty(s)) {
             try {
                 obj = Serialize.fromString(s, tClass);
@@ -192,7 +193,8 @@ public class PrefInternal implements PrefInterface {
 
     @Override
     public boolean putStringList(String key, List<String> value) {
-        return putString(key, Serialize.toString(value.toArray()));
+        String[] array = new String[value.size()];
+        return putString(key, Serialize.toString(value.toArray(array)));
     }
 
     @Override
@@ -207,7 +209,8 @@ public class PrefInternal implements PrefInterface {
 
     @Override
     public boolean putFloatList(String key, List<Float> value) {
-        return putString(key, Serialize.toString(value.toArray()));
+        Float[] array = new Float[value.size()];
+        return putString(key, Serialize.toString(value.toArray(array)));
     }
 
     @Override
@@ -222,7 +225,8 @@ public class PrefInternal implements PrefInterface {
 
     @Override
     public boolean putDoubleList(String key, List<Double> value) {
-        return putString(key, Serialize.toString(value.toArray()));
+        Double[] array = new Double[value.size()];
+        return putString(key, Serialize.toString(value.toArray(array)));
     }
 
     @Override
@@ -237,7 +241,8 @@ public class PrefInternal implements PrefInterface {
 
     @Override
     public boolean putIntList(String key, List<Integer> value) {
-        return putString(key, Serialize.toString(value.toArray()));
+        Integer[] array = new Integer[value.size()];
+        return putString(key, Serialize.toString(value.toArray(array)));
     }
 
     @Override
@@ -252,7 +257,8 @@ public class PrefInternal implements PrefInterface {
 
     @Override
     public boolean putBooleanList(String key, List<Boolean> value) {
-        return putString(key, Serialize.toString(value.toArray()));
+        Boolean[] array = new Boolean[value.size()];
+        return putString(key, Serialize.toString(value.toArray(array)));
     }
 
     @Override
@@ -267,7 +273,8 @@ public class PrefInternal implements PrefInterface {
 
     @Override
     public boolean putLongList(String key, List<Long> value) {
-        return putString(key, Serialize.toString(value.toArray()));
+        Long[] array = new Long[value.size()];
+        return putString(key, Serialize.toString(value.toArray(array)));
     }
 
     @Override
