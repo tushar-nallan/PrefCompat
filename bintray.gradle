@@ -1,0 +1,106 @@
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = GROUP // Maven Group ID for the artifact
+
+install {
+  repositories.mavenInstaller {
+    // This generates POM.xml with proper parameters
+    pom {
+      project {
+        packaging 'aar'
+        groupId GROUP
+        artifactId bintrayName
+
+        // Add your description here
+        name libraryName
+        description POM_DESCRIPTION
+        url POM_SITE_URL
+
+        // Set your license
+        licenses {
+          license {
+            name POM_LICENCE_NAME
+            url POM_LICENCE_URL
+          }
+        }
+        developers {
+          developer {
+            id POM_DEVELOPER_ID
+            name POM_DEVELOPER_NAME
+            email POM_DEVELOPER_EMAIL
+          }
+        }
+        scm {
+          connection POM_GIT_URL
+          developerConnection POM_GIT_URL
+          url POM_SITE_URL
+        }
+      }
+    }
+  }
+}
+
+apply plugin: 'com.jfrog.bintray'
+
+version = VERSION_NAME
+
+if (project.hasProperty("android")) {
+  // Android libraries
+  task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+  }
+
+  task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+  }
+} else {
+  // Java libraries
+  task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+  }
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+  classifier = 'javadoc'
+  from javadoc.destinationDir
+}
+
+artifacts {
+  archives javadocJar
+  archives sourcesJar
+}
+
+// Bintray
+Properties properties = new Properties()
+if (project.rootProject.file('local.properties').exists()) {
+  properties.load(project.rootProject.file('local.properties').newDataInputStream())
+}
+
+bintray {
+  user = properties.getProperty("bintray.user")
+  key = properties.getProperty("bintray.apikey")
+
+  configurations = ['archives']
+  pkg {
+    repo = POM_REPO
+    name = bintrayName
+    desc = POM_DESCRIPTION
+    websiteUrl = POM_SITE_URL
+    userOrg = POM_ORG
+    vcsUrl = POM_GIT_URL
+    licenses = POM_LICENCES
+    publish = true
+    publicDownloadNumbers = true
+    version {
+      desc = POM_DESCRIPTION
+      gpg {
+        sign = true //Determines whether to GPG sign the files. The default is false
+        passphrase = properties.getProperty("bintray.gpg.password")
+        //Optional. The passphrase for GPG signing'
+      }
+    }
+  }
+}

@@ -1,1 +1,4 @@
-include ':SampleApp', ':prefcompat'
+include ':app'
+include ':prefcompat'
+
+rootProject.name = 'prefcompat-parent'

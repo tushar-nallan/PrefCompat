@@ -1,16 +1,11 @@
-apply plugin: 'com.android.library'
-
-ext {
-  bintrayName = 'PrefCompat'
-  libraryName = 'PrefCompat'
-}
+apply plugin: 'com.android.application'
 
 android {
   compileSdkVersion COMPILE_SDK_VERSION
   buildToolsVersion BUILD_TOOLS_VERSION
-  resourcePrefix "prefcompat_"
 
   defaultConfig {
+    applicationId "com.tramsun.libs.prefcompatsample"
     minSdkVersion MIN_SDK_VERSION
     targetSdkVersion TARGET_SDK_VERSION
     versionCode 1
@@ -25,10 +20,10 @@ android {
 }
 
 dependencies {
+  compile "com.android.support:appcompat-v7:${SUPPORT_LIB_VERSION}"
+
+  compile project(":prefcompat")
+
   compile "io.reactivex.rxjava2:rxandroid:${RXANDROID_VERSION}"
   compile "io.reactivex.rxjava2:rxjava:${RXJAVA_VERSION}"
-
-  compile 'com.google.code.gson:gson:2.8.0'
 }
-
-apply from: '../bintray.gradle'

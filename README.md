@@ -14,7 +14,7 @@ How to Use
 Add the following line to the gradle dependencies for your module.
 
 ```groovy
-compile 'com.tramsun.libs:prefcompat:0.8'
+compile 'com.tramsun.libs:prefcompat:0.9.4'
 ```
 
 #### Usage
