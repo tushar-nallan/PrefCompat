@@ -1,5 +1,6 @@
 
-[![Build Status](https://travis-ci.org/tushar-acharya/PrefCompat.svg?branch=master)](https://travis-ci.org/tushar-acharya/PrefCompat) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PrefCompat-green.svg?style=true)](https://android-arsenal.com/details/1/3003)
+[![Build Status](https://travis-ci.org/tushar-acharya/PrefCompat.svg?branch=master)](https://travis-ci.org/tushar-acharya/PrefCompat) [![Version](https://api.bintray.com/packages/tushar-acharya/maven/PrefCompat/images/download.svg)](https://bintray.com/tushar-acharya/maven/PrefCompat)
+ [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PrefCompat-brightgreen.svg?style=true)](https://android-arsenal.com/details/1/3003)
 
 # PrefCompat
 
