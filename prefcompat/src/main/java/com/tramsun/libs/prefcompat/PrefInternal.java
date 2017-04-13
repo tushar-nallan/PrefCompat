@@ -167,7 +167,7 @@ public class PrefInternal implements PrefInterface {
   }
 
   @Override public boolean putStringList(String key, List<String> value) {
-    return putString(key, Serialize.toString(value.toArray()));
+    return putString(key, Serialize.toString(value));
   }
 
   @Override public List<String> getStringList(String key) {
@@ -180,7 +180,7 @@ public class PrefInternal implements PrefInterface {
   }
 
   @Override public boolean putFloatList(String key, List<Float> value) {
-    return putString(key, Serialize.toString(value.toArray()));
+    return putString(key, Serialize.toString(value));
   }
 
   @Override public List<Float> getFloatList(String key) {
@@ -193,7 +193,7 @@ public class PrefInternal implements PrefInterface {
   }
 
   @Override public boolean putDoubleList(String key, List<Double> value) {
-    return putString(key, Serialize.toString(value.toArray()));
+    return putString(key, Serialize.toString(value));
   }
 
   @Override public List<Double> getDoubleList(String key) {
@@ -206,7 +206,7 @@ public class PrefInternal implements PrefInterface {
   }
 
   @Override public boolean putIntList(String key, List<Integer> value) {
-    return putString(key, Serialize.toString(value.toArray()));
+    return putString(key, Serialize.toString(value));
   }
 
   @Override public List<Integer> getIntList(String key) {
@@ -219,7 +219,7 @@ public class PrefInternal implements PrefInterface {
   }
 
   @Override public boolean putBooleanList(String key, List<Boolean> value) {
-    return putString(key, Serialize.toString(value.toArray()));
+    return putString(key, Serialize.toString(value));
   }
 
   @Override public List<Boolean> getBooleanList(String key) {
@@ -232,7 +232,7 @@ public class PrefInternal implements PrefInterface {
   }
 
   @Override public boolean putLongList(String key, List<Long> value) {
-    return putString(key, Serialize.toString(value.toArray()));
+    return putString(key, Serialize.toString(value));
   }
 
   @Override public List<Long> getLongList(String key) {
